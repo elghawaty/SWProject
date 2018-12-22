@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public  class Software3 {
     int choice;
-    //to compare 
+    //to compare
   static  ArrayList<user> Accounts = new ArrayList<>();
   static ArrayList<item> Items = new ArrayList<>();
   static  ArrayList<item> Listofposts = new ArrayList<>();
@@ -34,7 +34,7 @@ BufferedWriter writer2 = new BufferedWriter(fr);
      writer2.write(Accounts.get(i).Name + " \t "+ Accounts.get(i).Password +" \t "+"\t"+Accounts.get(i).Age + " \t "+ Accounts.get(i).Gender);
       writer2.newLine();
       writer2.newLine();
-       
+
      }
      if(T!=null){
       writer2.write(" [ your post ]" );
@@ -46,8 +46,8 @@ BufferedWriter writer2 = new BufferedWriter(fr);
       fr.close();
    }
       }
-       
-    
+
+
  public static boolean checkdata(UserInterface user,item i) throws FileNotFoundException, IOException{
  BufferedReader br = new BufferedReader(new FileReader("database.txt"));
 String line;
@@ -61,14 +61,14 @@ while ((line = br.readLine()) != null) {
            Scanner inn=new Scanner(System.in);
         int choice=inn.nextInt();
          if(choice==1){
-            
+
              d.WritePost();
          }
          if(choice==2){
             System.out.println(" describe your lost item to search for: ");
                String c=inn.next();
                d.search(c);
-             
+
          }
         nameFound = true;
         break;
@@ -78,14 +78,14 @@ if (!nameFound) {
     out.println("INVALID username and password ..... Please enter the valid username and password");
 }
 br.close();
-    
+
         return false;
-    
-    
-    
-    
+
+
+
+
     }
-    
+
     }
 public static class item {
     public String date;
@@ -94,7 +94,7 @@ public static class item {
     public String type;
 
     public void setdesc(String t) {
-        
+
        description=t ;
     }
 
@@ -143,11 +143,11 @@ public static class deliever{
         address=y.next();
         meeting(place,address,i);
     }
-        
-    
+
+
     }
     public static void meeting(String place,String address,item i){
-        
+
         System.out.println("we will meet at("+place+")"+"\t"+" at address(" +address+")"+"\t"+" to give your (" +i.description+i.type+")");
     }
     }
@@ -184,7 +184,7 @@ public String getpassword(){
     return Password;
 }
 /////////////////
-public static boolean login(String username, String password) throws FileNotFoundException, IOException{ 
+public static boolean login(String username, String password) throws FileNotFoundException, IOException{
     UserInterface object=new UserInterface();
     database x=new database();
  object.data.Name=username;
@@ -209,18 +209,18 @@ while ((line = br.readLine()) != null) {
 }
 }
 if (!nameFound) {
-  
+
        System.out.println(" WELCOME in OUR APPLICATION >>>>> your data are saved successfully");
        System.out.println(" << 1-DO post >> "+ "\t"+" << 2-search post >> ");
            Scanner inn=new Scanner(System.in);
-        
+
         int choice=inn.nextInt();
          if(choice==1){
-              
+
             d.WritePost();
          }
          if(choice==2){
-            
+
               System.out.println(" describe your lost item to search for: ");
                String c=inn.next();
                d.search(c);
@@ -232,10 +232,10 @@ br.close();
 }
 /////////////////
 public void Run(){
-    
+
 }
     }
-     
+
  public static class UserInterface{
    SWW.user data=new SWW.user();
      public  void DisplayHomePage() throws IOException{
@@ -249,8 +249,8 @@ public void Run(){
          if(choice==2){
              RequiredDataSignup(data);
          }
- 
-        
+
+
      }
       public  void RequiredDataSignup(SWW.user u) throws IOException{
          String n;
@@ -272,9 +272,9 @@ public void Run(){
           u.setage(a);
           Listofaccounts.add(u);
           data.Signup(n, p, a, g);
-          
- 
-     
+
+
+
          }
       ///////////////////
        public void RequiredDatalogin(SWW.user u) throws IOException,FileNotFoundException{
@@ -284,26 +284,104 @@ public void Run(){
           data.setname(n);
          System.out.println("please enter  password:");
          String p=in.nextLine();
-          data.setpassword(p);     
+          data.setpassword(p);
           data.login(n, p);
          //handah 2l data base
-        
+
        }
     }
+
+     public static class detection {
+
+        Scanner in = new Scanner(System.in);
+        public message description;
+        public boolean messagestate=true;
+
+        public boolean checkdescription(item i) throws FileNotFoundException, IOException {
+            database d=new database();
+             detection t=new detection();
+            BufferedReader br = new BufferedReader(new FileReader("database.txt"));
+String line;
+boolean nameFound = false;
+
+while ((line = br.readLine()) != null) {
+    if (line.contains(i.description )&& line.contains(String.valueOf(i.date))&&line.contains(i.location )&&line.contains(i.type ) ) {
+      deliever r=new deliever();
+       System.out.println(" valid info ");
+        messagestate=true;
+        nameFound = true;
+          r.request(t,i);
+        break;
+}
+}
+if (!nameFound) {
+    out.println("WARNING:::ERROR INFO");
+     messagestate=false;
+}
+br.close();
+
+         return messagestate;
+
+
+
+
+    }
+          /*  if (m.d.date==description.d.date
+                    &&m.d.description==description.d.description
+                    &&m.d.location==description.d.location
+                    &&m.d.type==description.d.type) {
+                messagestate=true;
+            } else {
+                messagestate=false;
+            }
+            return messagestate;
+        }*/
+
+
+    }
+
+
+
+         public static class message {
+
+        Scanner in = new Scanner(System.in);
+        public item d=new item();
+
+        public void sendMessage() throws IOException {
+
+            System.out.println("if you are the real owner enter all information about item");
+            System.out.println("1-enter the description(color) of it ");
+            System.out.println("2-enter the date when you lost it ");
+            System.out.println("3-enter the location you lost it");
+            System.out.println("4-enter the type of it ");
+            descriptionItem();
+        }
+
+        public void descriptionItem() throws IOException {
+           detection detect=new detection();
+            d.description = in.next();
+             d.date = in.next();
+             d.location = in.next();
+             d.type = in.next();
+             detect.checkdescription(d);
+
+
+        }
+    }
+
 
  /**
      *
      * @param args
      */
     public static void main(String[] args) throws IOException,FileNotFoundException {
-        
-       
+
+
 UserInterface y = new UserInterface();
 y.DisplayHomePage();
-     
-        
-        
-        
+
+
+
+
     }
      }
-    
