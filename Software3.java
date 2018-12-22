@@ -369,6 +369,82 @@ br.close();
         }
     }
 
+public static class Comment {
+
+         public String text;
+         public message m=new message() ;
+
+         public  void Requestmessage() throws IOException{
+
+              System.out.println("please wait will contact you soon>>>>... ");
+         }
+
+          public  void WriteComment(String text)  throws IOException{
+
+              Requestmessage();
+              m.sendMessage();
+         }
+     }
+
+
+
+public static class Post{
+
+ Scanner in = new Scanner(System.in);
+  Scanner x = new Scanner(System.in);
+ public String text;
+ static  ArrayList<user> post = new ArrayList<>();
+ public item i=new item(); ;
+ public  void  WritePost()  throws IOException{
+      database d=new database();
+ System.out.println("the Description is : ");
+ text = in.nextLine();
+ i.setdesc(text);
+ System.out.println("the date is : ");
+  String datee = x.next();
+ i.setdata(datee);
+ System.out.println("the location is : ");
+  String location = x.next();
+ i.setloc(location);
+ System.out.println("the type is : ");
+  String type = x.next();
+ i.settype(type);
+ d.savedata(Listofaccounts,i);
+
+    }
+ public  void search(String s)  throws IOException{
+ BufferedReader br = new BufferedReader(new FileReader("database.txt"));
+String line;
+boolean nameFound = false;
+Post d=new Post();
+Comment t=new Comment();
+database b=new database();
+
+while ((line = br.readLine()) != null) {
+    if (line.contains(s)) {
+        out.println(" you can write comment here......");
+        String description=in.next();
+        t.WriteComment(description);
+        nameFound = true;
+       //  b.savedata(Listofaccounts,i);
+        break;
+
+}
+}
+if (!nameFound) {
+    out.println("sorry no posts match your search");
+     //b.savedata(Listofaccounts,i);
+}
+br.close();
+
+
+    }
+
+
+
+
+
+     }
 
  /**
      *
