@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -86,6 +87,46 @@ br.close();
     }
     
     }
+public static class item {
+    public String date;
+    public String description;
+    public String location;
+    public String type;
+
+    public void setdesc(String t) {
+        
+       description=t ;
+    }
+
+    public String getdesc() {
+       return description;
+    }
+
+    public void setloc(String t) {
+        location = t;
+    }
+
+    public String getloc() {
+      return location;
+    }
+
+    public void settype(String t) {
+        type = t;
+    }
+
+    public String gettype() {
+       return type;
+    }
+
+    public void setdata(String t) {
+        date = t;
+    }
+
+    public String  getdata() {
+      return date;
+    }
+
+}
 public static class deliever{
     public detection detect=new detection();
     public String place;
@@ -194,6 +235,62 @@ public void Run(){
     
 }
     }
+     
+ public static class UserInterface{
+   SWW.user data=new SWW.user();
+     public  void DisplayHomePage() throws IOException{
+         System.out.println("Welcome to our program [[ login ]] " +" \t "+ "[[ signup ]] ");
+         System.out.println("\t"+"[1] login " +" \t \t "+ "[2] signup ");
+         Scanner inn=new Scanner(System.in);
+        int choice=inn.nextInt();
+         if(choice==1){
+             RequiredDatalogin(data);
+         }
+         if(choice==2){
+             RequiredDataSignup(data);
+         }
+ 
+        
+     }
+      public  void RequiredDataSignup(SWW.user u) throws IOException{
+         String n;
+         String p;
+         String g;
+         int a;
+          Scanner in=new Scanner(System.in);
+          System.out.println("Please enter your name:");
+          n=in.nextLine();
+          u.setname(n);
+         System.out.println("please enter your password:");
+         p=in.nextLine();
+          u.setpassword(p);
+         System.out.println("Please enter your gender:");
+         g=in.nextLine();
+          u.setgender(g);
+         System.out.println("please enter your age:");
+         a=in.nextInt();
+          u.setage(a);
+          Listofaccounts.add(u);
+          data.Signup(n, p, a, g);
+          
+ 
+     
+         }
+      ///////////////////
+       public void RequiredDatalogin(SWW.user u) throws IOException,FileNotFoundException{
+       System.out.println("Please enter  username:");
+       Scanner in=new Scanner(System.in);
+         String n=in.nextLine();
+          data.setname(n);
+         System.out.println("please enter  password:");
+         String p=in.nextLine();
+          data.setpassword(p);     
+          data.login(n, p);
+         //handah 2l data base
+        
+       }
+    }
+
  /**
      *
      * @param args
