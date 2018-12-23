@@ -237,7 +237,7 @@ public void Run(){
     }
 
  public static class UserInterface{
-   SWW.user data=new SWW.user();
+   user data=new user();
      public  void DisplayHomePage() throws IOException{
          System.out.println("Welcome to our program [[ login ]] " +" \t "+ "[[ signup ]] ");
          System.out.println("\t"+"[1] login " +" \t \t "+ "[2] signup ");
@@ -252,7 +252,7 @@ public void Run(){
 
 
      }
-      public  void RequiredDataSignup(SWW.user u) throws IOException{
+      public  void RequiredDataSignup(user u) throws IOException{
          String n;
          String p;
          String g;
@@ -277,7 +277,7 @@ public void Run(){
 
          }
       ///////////////////
-       public void RequiredDatalogin(SWW.user u) throws IOException,FileNotFoundException{
+       public void RequiredDatalogin(user u) throws IOException,FileNotFoundException{
        System.out.println("Please enter  username:");
        Scanner in=new Scanner(System.in);
          String n=in.nextLine();
